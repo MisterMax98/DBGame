@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-
+//Коммент!!!
 	static DBManager dbManager;
 
 	EditText playerName;
