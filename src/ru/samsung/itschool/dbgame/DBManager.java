@@ -9,9 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class DBManager {
 	/*
-	 * TABLES: 
-           ------- 
-           RESULTS SCORE INTEGER USER VARCHAR
+	 * TABLES: ------- RESULTS SCORE INTEGER USER VARCHAR
 	 */
 	private Context context;
 	private String DB_NAME = "game.db";
@@ -30,7 +28,7 @@ public class DBManager {
 	private DBManager(Context context) {
 		this.context = context;
 		db = context.openOrCreateDatabase(DB_NAME, Context.MODE_PRIVATE, null);
-		createTablesIfNeedBe(); 
+		createTablesIfNeedBe();
 	}
 
 	void addResult(String username, int score) {
@@ -53,6 +51,33 @@ public class DBManager {
 		}
 
 		return data;
+	}
+
+	int getCount() {
+
+		Cursor cursor = db.rawQuery("SELECT SUM (SCORE) FROM RESULTS;", null);
+		cursor.moveToFirst();
+		int score = cursor.getInt(0);
+
+		return score;
+	}
+	
+	int getMax() {
+
+		Cursor cursor = db.rawQuery("SELECT MAX (SCORE) FROM RESULTS;", null);
+		cursor.moveToFirst();
+		int score = cursor.getInt(0);
+
+		return score;
+	}
+	
+	int getMin() {
+
+		Cursor cursor = db.rawQuery("SELECT MIN (SCORE) FROM RESULTS;", null);
+		cursor.moveToFirst();
+		int score = cursor.getInt(0);
+
+		return score;
 	}
 
 	private void createTablesIfNeedBe() {
