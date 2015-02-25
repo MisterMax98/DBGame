@@ -52,12 +52,12 @@ public class DBManager {
 
 		return data;
 	}
-	
-	void clr(){
+
+	void clr() {
 		db.delete("RESULTS", null, null);
 	}
 
-	int getCount() {
+	int getSum() {
 
 		Cursor cursor = db.rawQuery("SELECT SUM (SCORE) FROM RESULTS;", null);
 		cursor.moveToFirst();
@@ -65,7 +65,25 @@ public class DBManager {
 
 		return score;
 	}
-	
+
+	int getCount() {
+
+		Cursor cursor = db.rawQuery("SELECT COUNT (SCORE) FROM RESULTS;", null);
+		cursor.moveToFirst();
+		int score = cursor.getInt(0);
+
+		return score;
+	}
+
+	int getPlCount() {
+
+		Cursor cursor = db.rawQuery("SELECT COUNT (DISTINCT USERNAME) FROM RESULTS;", null);
+		cursor.moveToFirst();
+		int score = cursor.getInt(0);
+
+		return score;
+	}
+
 	int getMax() {
 
 		Cursor cursor = db.rawQuery("SELECT MAX (SCORE) FROM RESULTS;", null);
@@ -74,7 +92,7 @@ public class DBManager {
 
 		return score;
 	}
-	
+
 	int getMin() {
 
 		Cursor cursor = db.rawQuery("SELECT MIN (SCORE) FROM RESULTS;", null);

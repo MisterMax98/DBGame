@@ -61,4 +61,8 @@ public class MainActivity extends Activity {
 	public void showHoF(View v) {
 		startActivity(new Intent(this, HoFActivity.class));
 	}
+	
+	public void showStat(View v) {
+		startActivity(new Intent(this, Statistic.class));
+	}
 }
