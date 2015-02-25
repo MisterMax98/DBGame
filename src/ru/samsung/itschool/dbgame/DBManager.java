@@ -52,6 +52,10 @@ public class DBManager {
 
 		return data;
 	}
+	
+	void clr(){
+		db.delete("RESULTS", null, null);
+	}
 
 	int getCount() {
 
