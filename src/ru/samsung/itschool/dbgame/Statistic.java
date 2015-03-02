@@ -19,10 +19,10 @@ public class Statistic extends Activity {
 		TextView count = (TextView) findViewById(R.id.count);
 		TextView plCount = (TextView) findViewById(R.id.plCount);
 
-		min.setText("" + dbManager.getMin());
-		max.setText("" + dbManager.getMax());
-		sum.setText("" + dbManager.getSum());
-		count.setText("" + dbManager.getCount());
+		min.setText("" + dbManager.getMin(null));
+		max.setText("" + dbManager.getMax(null));
+		sum.setText("" + dbManager.getSum(null));
+		count.setText("" + dbManager.getCount(null));
 		plCount.setText("" + dbManager.getPlCount());
 	}
 }

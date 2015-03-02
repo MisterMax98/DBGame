@@ -57,49 +57,89 @@ public class DBManager {
 		db.delete("RESULTS", null, null);
 	}
 
-	int getSum() {
+	int getSum(String name) {
+		if (name == null) {
+			Cursor cursor = db.rawQuery("SELECT SUM (SCORE) FROM RESULTS;",
+					null);
+			cursor.moveToFirst();
+			int score = cursor.getInt(0);
 
-		Cursor cursor = db.rawQuery("SELECT SUM (SCORE) FROM RESULTS;", null);
-		cursor.moveToFirst();
-		int score = cursor.getInt(0);
-
-		return score;
+			return score;
+		} else {
+			Cursor cursor = db.rawQuery(
+					"SELECT SUM (SCORE) FROM RESULTS WHERE USERNAME = '" + name
+							+ "';", null);
+			cursor.moveToFirst();
+			int score = cursor.getInt(0);
+			return score;
+		}
 	}
 
-	int getCount() {
+	int getCount(String name) {
+		if (name == null) {
+			Cursor cursor = db.rawQuery("SELECT COUNT (SCORE) FROM RESULTS;",
+					null);
+			cursor.moveToFirst();
+			int score = cursor.getInt(0);
 
-		Cursor cursor = db.rawQuery("SELECT COUNT (SCORE) FROM RESULTS;", null);
-		cursor.moveToFirst();
-		int score = cursor.getInt(0);
+			return score;
+		} else {
+			Cursor cursor = db.rawQuery(
+					"SELECT COUNT (SCORE) FROM RESULTS WHERE USERNAME = '"
+							+ name + "';", null);
+			cursor.moveToFirst();
+			int score = cursor.getInt(0);
 
-		return score;
+			return score;
+		}
 	}
 
 	int getPlCount() {
 
-		Cursor cursor = db.rawQuery("SELECT COUNT (DISTINCT USERNAME) FROM RESULTS;", null);
+		Cursor cursor = db.rawQuery(
+				"SELECT COUNT (DISTINCT USERNAME) FROM RESULTS;", null);
 		cursor.moveToFirst();
 		int score = cursor.getInt(0);
 
 		return score;
 	}
 
-	int getMax() {
+	int getMax(String name) {
+		if (name == null) {
+			Cursor cursor = db.rawQuery("SELECT MAX (SCORE) FROM RESULTS;",
+					null);
+			cursor.moveToFirst();
+			int score = cursor.getInt(0);
 
-		Cursor cursor = db.rawQuery("SELECT MAX (SCORE) FROM RESULTS;", null);
-		cursor.moveToFirst();
-		int score = cursor.getInt(0);
+			return score;
+		} else {
+			Cursor cursor = db.rawQuery(
+					"SELECT MAX (SCORE) FROM RESULTS WHERE USERNAME = '" + name
+							+ "';", null);
+			cursor.moveToFirst();
+			int score = cursor.getInt(0);
 
-		return score;
+			return score;
+		}
 	}
 
-	int getMin() {
+	int getMin(String name) {
+		if (name == null) {
+			Cursor cursor = db.rawQuery("SELECT MIN (SCORE) FROM RESULTS;",
+					null);
+			cursor.moveToFirst();
+			int score = cursor.getInt(0);
 
-		Cursor cursor = db.rawQuery("SELECT MIN (SCORE) FROM RESULTS;", null);
-		cursor.moveToFirst();
-		int score = cursor.getInt(0);
+			return score;
+		} else {
+			Cursor cursor = db.rawQuery(
+					"SELECT MIN (SCORE) FROM RESULTS WHERE USERNAME = '" + name
+							+ "';", null);
+			cursor.moveToFirst();
+			int score = cursor.getInt(0);
 
-		return score;
+			return score;
+		}
 	}
 
 	private void createTablesIfNeedBe() {
