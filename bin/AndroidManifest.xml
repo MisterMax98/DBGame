@@ -9,12 +9,13 @@
         android:targetSdkVersion="21" />
 
     <application
-        android:icon="@drawable/smallgreen"
+        android:icon="@drawable/but"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,15 +24,18 @@
         </activity>
         <activity
             android:name=".HoFActivity"
-            android:label="@string/title_activity_ho_f" >
+            android:label="@string/title_activity_ho_f"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".Statistic"
-            android:label="@string/title_activity_statistic" >
+            android:label="@string/title_activity_statistic"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".PlayerStat"
-            android:label="@string/title_activity_player_stat" >
+            android:label="@string/title_activity_player_stat"
+            android:screenOrientation="landscape" >
         </activity>
     </application>
 
