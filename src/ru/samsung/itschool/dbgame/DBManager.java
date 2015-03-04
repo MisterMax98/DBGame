@@ -75,6 +75,37 @@ public class DBManager {
 		}
 	}
 
+	double getChet(String name) {
+		if (name == null) {
+			Cursor cursor = db.rawQuery(
+					"SELECT COUNT(SCORE) FROM RESULTS WHERE SCORE % 2 = 0;",
+					null);
+			cursor.moveToFirst();
+			int score = cursor.getInt(0);
+
+			Cursor count = db.rawQuery("SELECT COUNT(SCORE) FROM RESULTS;",
+					null);
+			count.moveToFirst();
+			int c = count.getInt(0);
+
+			return (double) score / c * 100;
+		} else {
+			Cursor cursor = db.rawQuery(
+					"SELECT COUNT(SCORE) FROM RESULTS WHERE SCORE % 2 = 0 AND USERNAME = '"
+							+ name + "';", null);
+			cursor.moveToFirst();
+			int score = cursor.getInt(0);
+
+			Cursor count = db.rawQuery(
+					"SELECT COUNT(SCORE) FROM RESULTS WHERE USERNAME = '"
+							+ name + "';", null);
+			count.moveToFirst();
+			int c = count.getInt(0);
+
+			return (double) score / c * 100;
+		}
+	}
+
 	int getCount(String name) {
 		if (name == null) {
 			Cursor cursor = db.rawQuery("SELECT COUNT (SCORE) FROM RESULTS;",

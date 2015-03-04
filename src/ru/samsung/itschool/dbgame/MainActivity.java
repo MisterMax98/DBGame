@@ -1,6 +1,8 @@
 package ru.samsung.itschool.dbgame;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -11,7 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-//Коммент!!!
+	// Коммент!!!
 	static DBManager dbManager;
 
 	EditText playerName;
@@ -19,7 +21,7 @@ public class MainActivity extends Activity {
 	ImageButton playButton;
 
 	@Override
-	protected void onCreate(Bundle  savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.activity_main);
 		dbManager = DBManager.getInstance(this);
@@ -48,12 +50,20 @@ public class MainActivity extends Activity {
 			public void onAnimationEnd(Animation animation) {
 				playButton.setClickable(true);
 				playButton.setImageResource(R.drawable.green);
-				dbManager.addResult(MainActivity.this.playerName.getText().toString(),
-						            Integer.parseInt(MainActivity.this.gameResult.getText().toString()));
+				dbManager.addResult(MainActivity.this.playerName.getText()
+						.toString(), Integer
+						.parseInt(MainActivity.this.gameResult.getText()
+								.toString()));
 			}
 		});
 
-		gameResult.setText(((int) (Math.random() * 1001))+"");
+		int ch = ((int) (Math.random() * 1001));
+		if (ch % 2 == 1) {
+			gameResult.setTextColor(Color.RED);
+		} else {
+			gameResult.setTextColor(Color.GREEN);
+		}
+		gameResult.setText(ch + "");
 		gameResult.startAnimation(play);
 
 	}
@@ -61,8 +71,9 @@ public class MainActivity extends Activity {
 	public void showHoF(View v) {
 		startActivity(new Intent(this, HoFActivity.class));
 	}
-	
+
 	public void showStat(View v) {
 		startActivity(new Intent(this, Statistic.class));
 	}
+
 }

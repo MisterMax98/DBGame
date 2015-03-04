@@ -22,8 +22,8 @@ public class HoFActivity extends Activity implements
 	Button clr;
 	ListView lw;
 	TextView restv;
-	LinkedList<String> name;
 	ArrayList<Result> results;
+	ResultAdapter ra;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,21 +36,17 @@ public class HoFActivity extends Activity implements
 		loadRes();
 		final Context c = this;
 
-		ArrayAdapter<String> ad = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, name);
-		lw.setAdapter(ad);
+		// ArrayAdapter<String> ad = new ArrayAdapter<String>(this,
+		// android.R.layout.simple_list_item_1, );
+		ra = new ResultAdapter(this, results);
+		lw.setAdapter(ra);
 		lw.setOnItemClickListener(this);
+		ra.notifyDataSetInvalidated();
 
 	}
 
 	void loadRes() {
-		name = new LinkedList<String>();
 		results = dbManager.getAllResults();
-		String resStr = "";
-		for (Result res : results) {
-			resStr = res.name + ": " + res.score + "\n";
-			name.add(resStr);
-		}
 	}
 
 	@Override
@@ -59,6 +55,7 @@ public class HoFActivity extends Activity implements
 		case R.id.clr:
 			dbManager.clr();
 			loadRes();
+			lw.setAdapter(new ResultAdapter(this, results));
 			break;
 
 		default:
@@ -73,7 +70,7 @@ public class HoFActivity extends Activity implements
 		Intent in = new Intent(this, PlayerStat.class);
 		in.putExtra("player", results.get(position).name);
 		startActivity(in);
-		
+
 	}
 
 }
