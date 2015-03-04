@@ -1,9 +1,12 @@
 package ru.samsung.itschool.dbgame;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -12,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+@SuppressLint("NewApi")
 public class MainActivity extends Activity {
 	// Коммент!!!
 	static DBManager dbManager;
@@ -20,6 +24,7 @@ public class MainActivity extends Activity {
 	TextView gameResult;
 	ImageButton playButton;
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,6 +34,29 @@ public class MainActivity extends Activity {
 		gameResult = (TextView) this.findViewById(R.id.GameResult);
 		playButton = (ImageButton) this.findViewById(R.id.playButton);
 		playerName = (EditText) this.findViewById(R.id.playerName);
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.item1: {
+			showHoF();
+			break;
+		}
+		case R.id.item2: {
+			showStat();
+			break;
+		}
+		}
+		return true;
+
 	}
 
 	public void play(View v) {
@@ -39,7 +67,6 @@ public class MainActivity extends Activity {
 			@Override
 			public void onAnimationStart(Animation animation) {
 				playButton.setClickable(false);
-				playButton.setImageResource(R.drawable.gray);
 			}
 
 			@Override
@@ -49,7 +76,6 @@ public class MainActivity extends Activity {
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				playButton.setClickable(true);
-				playButton.setImageResource(R.drawable.green);
 				dbManager.addResult(MainActivity.this.playerName.getText()
 						.toString(), Integer
 						.parseInt(MainActivity.this.gameResult.getText()
@@ -68,11 +94,11 @@ public class MainActivity extends Activity {
 
 	}
 
-	public void showHoF(View v) {
+	public void showHoF() {
 		startActivity(new Intent(this, HoFActivity.class));
 	}
 
-	public void showStat(View v) {
+	public void showStat() {
 		startActivity(new Intent(this, Statistic.class));
 	}
 

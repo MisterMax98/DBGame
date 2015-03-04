@@ -42,31 +42,10 @@
         android:text=""
         android:textSize="50sp" />
 
-    <Button
-        android:id="@+id/hallOfFame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="showHoF"
-        android:text="Hall of Fame"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/stat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/hallOfFame"
-        android:layout_centerHorizontal="true"
-        android:onClick="showStat"
-        android:text="Статистика"
-        android:textSize="20sp" />
-
     <ImageButton
         android:id="@+id/playButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/stat"
         android:layout_below="@id/GameResult"
         android:layout_centerHorizontal="true"
         android:background="@null"

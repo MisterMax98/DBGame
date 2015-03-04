@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -30,9 +32,7 @@ public class HoFActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_hof);
 		dbManager = DBManager.getInstance(this);
-		clr = (Button) findViewById(R.id.clr);
 		lw = (ListView) findViewById(R.id.LV);
-		clr.setOnClickListener(this);
 		loadRes();
 		final Context c = this;
 
@@ -44,6 +44,26 @@ public class HoFActivity extends Activity implements
 		ra.notifyDataSetInvalidated();
 
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_hof, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.item1: {
+			dbManager.clr();
+			loadRes();
+			lw.setAdapter(new ResultAdapter(this, results));
+			break;
+		}
+		}
+		return true;
+
+	}
 
 	void loadRes() {
 		results = dbManager.getAllResults();
@@ -51,17 +71,7 @@ public class HoFActivity extends Activity implements
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.clr:
-			dbManager.clr();
-			loadRes();
-			lw.setAdapter(new ResultAdapter(this, results));
-			break;
-
-		default:
-			break;
-		}
-
+	
 	}
 
 	@Override
