@@ -46,10 +46,19 @@ public class HoFActivity extends Activity implements
 	}
 	
 	@Override
+	protected void onResume() {
+		super.onResume();
+		loadRes();
+		lw.setAdapter(new ResultAdapter(this, results));
+	}
+	
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.menu_hof, menu);
 		return true;
 	}
+	
+	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

@@ -53,6 +53,16 @@ public class DBManager {
 		return data;
 	}
 
+	void deletePlSc(String username) {
+		db.execSQL("DELETE FROM RESULTS WHERE USERNAME='" + username + "';");
+	}
+
+	void updateInfo(String username, String phone, String photo) {
+		db.execSQL("DELETE FROM INFO WHERE USERNAME='" + username + "';");
+		db.execSQL("INSERT INTO INFO VALUES ('" + username + "', '" + phone
+				+ "', '" + photo + "');");
+	}
+
 	void clr() {
 		db.delete("RESULTS", null, null);
 	}
@@ -175,6 +185,8 @@ public class DBManager {
 
 	private void createTablesIfNeedBe() {
 		db.execSQL("CREATE TABLE IF NOT EXISTS RESULTS (USERNAME TEXT, SCORE INTEGER);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS INFO (USERNAME TEXT, PHONE TEXT, PHOTO TEXT);");
+
 	}
 
 	private boolean dbExist() {

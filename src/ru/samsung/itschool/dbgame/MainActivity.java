@@ -84,11 +84,7 @@ public class MainActivity extends Activity {
 		});
 
 		int ch = ((int) (Math.random() * 1001));
-		if (ch % 2 == 1) {
-			gameResult.setTextColor(Color.RED);
-		} else {
-			gameResult.setTextColor(Color.GREEN);
-		}
+		gameResult.setTextColor(Color.BLACK);
 		gameResult.setText(ch + "");
 		gameResult.startAnimation(play);
 

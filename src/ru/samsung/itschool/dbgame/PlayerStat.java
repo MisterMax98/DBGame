@@ -3,6 +3,8 @@ package ru.samsung.itschool.dbgame;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class PlayerStat extends Activity {
@@ -18,7 +20,10 @@ public class PlayerStat extends Activity {
 
 		Intent in = this.getIntent();
 		name = in.getExtras().getString("player");
+		updateInfo();
+	}
 
+	void updateInfo() {
 		TextView pl = (TextView) findViewById(R.id.Player);
 		TextView min = (TextView) findViewById(R.id.min);
 		TextView max = (TextView) findViewById(R.id.max);
@@ -37,7 +42,7 @@ public class PlayerStat extends Activity {
 			nechet = 100 - chet;
 		}
 
-		pl.setText(pl.getText() + " " + name);
+		pl.setText("Статистика " + name);
 		min.setText("" + dbManager.getMin(name));
 		max.setText("" + dbManager.getMax(name));
 		sum.setText("" + dbManager.getSum(name));
@@ -45,4 +50,24 @@ public class PlayerStat extends Activity {
 		chetT.setText("" + chet + "%");
 		nechetT.setText("" + nechet + "%");
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_hof, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.item1: {
+			dbManager.deletePlSc(name);
+			updateInfo();
+			break;
+		}
+		}
+		return true;
+
+	}
+
 }
