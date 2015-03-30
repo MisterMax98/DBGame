@@ -71,8 +71,8 @@ public class HoFActivity extends Activity implements
 		}
 		}
 		return true;
-
 	}
+
 
 	void loadRes() {
 		results = dbManager.getAllResults();
@@ -89,7 +89,6 @@ public class HoFActivity extends Activity implements
 		Intent in = new Intent(this, PlayerStat.class);
 		in.putExtra("player", results.get(position).name);
 		startActivity(in);
-
 	}
 
 }
