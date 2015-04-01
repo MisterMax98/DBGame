@@ -35,9 +35,6 @@ public class HoFActivity extends Activity implements
 		lw = (ListView) findViewById(R.id.LV);
 		loadRes();
 		final Context c = this;
-
-		// ArrayAdapter<String> ad = new ArrayAdapter<String>(this,
-		// android.R.layout.simple_list_item_1, );
 		ra = new ResultAdapter(this, results);
 		lw.setAdapter(ra);
 		lw.setOnItemClickListener(this);

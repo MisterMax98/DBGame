@@ -3,6 +3,7 @@ package ru.samsung.itschool.dbgame;
 import java.io.File;
 import java.util.ArrayList;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -61,6 +62,25 @@ public class DBManager {
 		db.execSQL("DELETE FROM INFO WHERE USERNAME='" + username + "';");
 		db.execSQL("INSERT INTO INFO VALUES ('" + username + "', '" + phone
 				+ "', '" + photo + "');");
+	}
+
+	ContentValues loadInfo(String username) {
+
+		Cursor cursor = db.rawQuery("SELECT * FROM INFO WHERE USERNAME= '"
+				+ username + "';", null);
+		boolean hasMoreData = cursor.moveToFirst();
+
+		if (hasMoreData) {
+			String phone = cursor.getString(cursor.getColumnIndex("PHONE"));
+			String photo = cursor.getString(cursor.getColumnIndex("PHOTO"));
+			ContentValues cv = new ContentValues();
+			cv.put("PHONE", phone);
+			cv.put("PHOTO", photo);
+			return cv;
+		} else {
+			return null;
+		}
+		
 	}
 
 	void clr() {
@@ -164,6 +184,17 @@ public class DBManager {
 		}
 	}
 
+	String getUserPic(String name) {
+		Cursor cursor = db.rawQuery("SELECT PHOTO FROM INFO WHERE USERNAME='"
+				+ name + "'", null);
+		cursor.moveToFirst();
+		// ≈сли нет фото - возвращаем пустую строку
+		if (!cursor.moveToFirst() || cursor.isNull(0))
+			return "";
+		else
+			return cursor.getString(0);
+	}
+	
 	int getMin(String name) {
 		if (name == null) {
 			Cursor cursor = db.rawQuery("SELECT MIN (SCORE) FROM RESULTS;",
